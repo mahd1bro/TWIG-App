@@ -1,0 +1,51 @@
+/* Additional Twig-specific styles */
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    background: #e8f5e8;
+    color: #388e3c;
+    border: 1px solid #81c784;
+}
+
+.alert-error {
+    background: #ffebee;
+    color: #d32f2f;
+    border: 1px solid #e57373;
+}
+
+.btn-nav {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--dark-grey);
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-nav.active,
+.btn-nav:hover {
+    background: var(--primary-gradient);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-auth {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.filter-form {
+    display: flex;
+    gap: 1rem;
+}

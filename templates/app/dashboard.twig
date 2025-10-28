@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Ticflow</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="navbar-container">
+                <div class="app-title">
+                    <div class="title-icon">T</div>
+                    <h1>Ticflow</h1>
+                </div>
+                <div class="switch-states">
+                    <div class="first">
+                        <a href="dashboard.php" class="btn-nav active">Dashboard</a>
+                    </div>
+                    <div class="second">
+                        <a href="tickets.php" class="btn-nav">Tickets</a>
+                    </div>
+                </div>
+                <div class="user-welcome">
+                    <span class="welcome-text">Welcome, {{ user.name }}!</span>
+                    <a href="logout.php" class="logout-btn">Logout</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="dashboard-page">
+                <div class="page-header">
+                    <h2>Dashboard Overview</h2>
+                    <p>Welcome back! Here's what's happening with your tickets.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card total-tickets">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <h3>{{ stats.total }}</h3>
+                            <p>Total Tickets</p>
+                        </div>
+                    </div>
+                    <div class="stat-card open-tickets">
+                        <div class="stat-icon">🟡</div>
+                        <div class="stat-info">
+                            <h3>{{ stats.open }}</h3>
+                            <p>Open Tickets</p>
+                        </div>
+                    </div>
+                    <div class="stat-card in-progress-tickets">
+                        <div class="stat-icon">🔵</div>
+                        <div class="stat-info">
+                            <h3>{{ stats.in_progress }}</h3>
+                            <p>In Progress</p>
+                        </div>
+                    </div>
+                    <div class="stat-card resolved-tickets">
+                        <div class="stat-icon">🟢</div>
+                        <div class="stat-info">
+                            <h3>{{ stats.resolved }}</h3>
+                            <p>Resolved Tickets</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-tickets">
+                    <div class="section-header">
+                        <h3>Recent Tickets</h3>
+                        <a href="tickets.php" class="btn-primary">View All Tickets</a>
+                    </div>
+                    <div class="tickets-list">
+                        {% for ticket in recentTickets %}
+                        <div class="ticket-item">
+                            <div class="ticket-info">
+                                <h4>{{ ticket.title }}</h4>
+                                <p>{{ ticket.description }}</p>
+                                <div class="ticket-meta">
+                                    <span class="ticket-status {{ ticket.status }}">{{ ticket.status }}</span>
+                                    <span class="ticket-priority {{ ticket.priority }}">{{ ticket.priority }}</span>
+                                    <span class="ticket-date">{{ ticket.created_at|date('M j, Y') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="empty-state">
+                            <p>No tickets yet. <a href="tickets.php">Create your first ticket</a></p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <!-- Footer content -->
+        </footer>
+    </div>
+</body>
+</html>
