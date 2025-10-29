@@ -35,45 +35,6 @@ if ($_POST) {
             $error = 'Failed to create ticket';
         }
     }
-    
-    if (isset($_POST['update_ticket'])) {
-        $id = $_POST['ticket_id'] ?? '';
-        $title = $_POST['title'] ?? '';
-        $description = $_POST['description'] ?? '';
-        $status = $_POST['status'] ?? '';
-        $priority = $_POST['priority'] ?? '';
-        
-        $query = "UPDATE tickets SET title = :title, description = :description, 
-                  status = :status, priority = :priority WHERE id = :id AND user_id = :user_id";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':user_id', $user['id']);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':priority', $priority);
-        
-        if ($stmt->execute()) {
-            $message = 'Ticket updated successfully!';
-        } else {
-            $error = 'Failed to update ticket';
-        }
-    }
-    
-    if (isset($_POST['delete_ticket'])) {
-        $id = $_POST['ticket_id'] ?? '';
-        
-        $query = "DELETE FROM tickets WHERE id = :id AND user_id = :user_id";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':user_id', $user['id']);
-        
-        if ($stmt->execute()) {
-            $message = 'Ticket deleted successfully!';
-        } else {
-            $error = 'Failed to delete ticket';
-        }
-    }
 }
 
 // Get filter parameters

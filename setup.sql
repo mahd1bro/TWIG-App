@@ -1,4 +1,8 @@
 CREATE DATABASE ticket_system;
+CREATE USER 'ticket_user'@'localhost' IDENTIFIED BY 'password123';
+GRANT ALL PRIVILEGES ON ticket_system.* TO 'ticket_user'@'localhost';
+FLUSH PRIVILEGES;
+
 USE ticket_system;
 
 CREATE TABLE users (
@@ -21,11 +25,8 @@ CREATE TABLE tickets (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Sample data for features
+-- Insert test user (password: 'password')
 INSERT INTO users (name, email, password) VALUES 
-('John Doe', 'john@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'); -- password
+('Test User', 'test@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 
-INSERT INTO tickets (user_id, title, description, status, priority) VALUES 
-(1, 'Login issue', 'Users cannot login with correct credentials', 'open', 'high'),
-(1, 'Dashboard loading slow', 'Dashboard takes more than 5 seconds to load', 'in-progress', 'medium'),
-(1, 'Update user profile', 'Allow users to update their profile information', 'resolved', 'low');
+EXIT;
