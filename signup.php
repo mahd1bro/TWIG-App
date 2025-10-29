@@ -1,6 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once 'vendor/autoload.php';
-require_once 'includes/auth.php';
 require_once 'includes/database.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
@@ -45,8 +47,7 @@ if ($_POST) {
             
             if ($stmt->execute()) {
                 $success = 'Account created successfully! Please login.';
-                header('Location: login.php?success=1');
-                exit;
+                // Don't redirect immediately, show success message
             } else {
                 $error = 'Failed to create account';
             }
@@ -56,6 +57,7 @@ if ($_POST) {
 
 echo $twig->render('auth/signup.twig', [
     'error' => $error,
-    'success' => $success
+    'success' => $success,
+    'postData' => $_POST // Pass form data back to template
 ]);
 ?>
